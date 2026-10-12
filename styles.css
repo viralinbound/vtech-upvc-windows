@@ -1336,3 +1336,17 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(2,64,154,.45)!
   .pgroup .prod{position:relative!important;top:auto!important;scale:1!important;border-radius:0!important;box-shadow:none!important;margin-bottom:0!important;min-height:calc(100vh - 54px)!important;align-content:center}
   .pgroup:not(:last-of-type)>.prod:last-of-type{margin-bottom:0!important}
 }
+
+/* ===== v24: process steps scroll highlight ===== */
+.proc2__s{padding:18px 12px;border-radius:18px;transition:transform .55s var(--ease),background .5s,box-shadow .5s;opacity:.55}
+.proc2__s i{transition:transform .55s var(--ease),background .45s,color .45s,box-shadow .45s}
+.proc2__s h3,.proc2__s p{transition:color .45s}
+.proc2__s h3{color:#4A5873}
+.proc2__s.is-on{opacity:1}
+.proc2__s.is-on h3{color:#012A63}
+.proc2__s.is-on i,.proc2__g[style*="--p"] .proc2__s.is-on:nth-child(n) i{background:#02409A!important;color:#fff!important;border-color:#02409A!important}
+.proc2__g[style*="--p"] .proc2__s:not(.is-on):nth-child(1) i{background:#fff!important;color:#02409A!important}
+.proc2__s.is-cur{background:#EEF3FA;transform:translateY(-8px);box-shadow:0 22px 44px -26px rgba(2,64,154,.55)}
+.proc2__s.is-cur i{transform:scale(1.14);animation:procPulse 1.8s ease-out infinite}
+@keyframes procPulse{0%{box-shadow:0 0 0 0 rgba(2,64,154,.45)}100%{box-shadow:0 0 0 22px rgba(2,64,154,0)}}
+@media (prefers-reduced-motion:reduce){.proc2__s.is-cur i{animation:none}}

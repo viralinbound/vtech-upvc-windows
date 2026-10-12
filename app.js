@@ -925,3 +925,18 @@ void main(){
 if (location.hash === '#lead') { const top = () => { document.querySelectorAll('.hero,.hero-pin').forEach((e) => { e.scrollTop = 0; e.scrollLeft = 0; }); scrollTo(0, 0); if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true }); }; top(); addEventListener('load', () => { top(); setTimeout(top, 120); }); }
 
 addEventListener('hashchange', () => { if (location.hash === '#lead') document.querySelectorAll('.hero,.hero-pin').forEach((e) => { e.scrollTop = 0; }); });
+
+/* v24: process steps light up one by one as the section is scrolled into reach */
+(function () {
+  var g = document.querySelector('.proc2__g'); if (!g) return;
+  var s = [].slice.call(g.querySelectorAll('.proc2__s')), t = false;
+  function upd() {
+    t = false;
+    var r = g.getBoundingClientRect(), vh = innerHeight;
+    var p = Math.max(0, Math.min(1, (vh * 0.88 - r.top) / (vh * 0.5)));
+    var n = Math.ceil(p * s.length - 0.001), cur = Math.max(0, n - 1);
+    s.forEach(function (e, i) { e.classList.toggle('is-on', i < n); e.classList.toggle('is-cur', n > 0 && i === cur); });
+  }
+  function q() { if (!t) { t = true; requestAnimationFrame(upd); } }
+  addEventListener('scroll', q, { passive: true }); addEventListener('resize', q); upd();
+})();
