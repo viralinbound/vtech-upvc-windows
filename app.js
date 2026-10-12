@@ -593,7 +593,7 @@ void main(){
       p.y -= p.s / 1000; p.a += .01; if (p.y < -.05) { p.y = 1.05; p.x = Math.random(); }
       const px = (p.x + Math.sin(p.a) * .01 + mx * p.r * .01) * W, py = (p.y + my * p.r * .01) * H, r = p.r * (W / 1400 + .6);
       const g = x.createRadialGradient(px, py, 0, px, py, r * 6);
-      g.addColorStop(0, p.gold ? 'rgba(232,196,120,.9)' : 'rgba(255,90,80,.85)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+      g.addColorStop(0, p.gold ? 'rgba(200,215,240,.9)' : 'rgba(255,90,80,.85)'); g.addColorStop(1, 'rgba(0,0,0,0)');
       x.fillStyle = g; x.beginPath(); x.arc(px, py, r * 6, 0, Math.PI * 2); x.fill();
     });
   })(0);
