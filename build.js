@@ -321,7 +321,7 @@ ${sections}
   <div class="clients__head"><p class="kicker reveal">Clientele</p><h2 id="cl-h" data-split>Trusted by public and private sector organisations.</h2></div>
   ${clientRow(CLIENTS.slice(0, half))}
   ${clientRow(CLIENTS.slice(half), true)}
-  <p class="note">Client logos exactly as shown on VTech’s homepage. The website lists no project details or testimonials for them, so none are added here.</p>
+  <p class="note">Client logos exactly as shown on VTech’s homepage. The website lists no project details for these clients, so none are added here.</p>
   <div class="real2">
     <figure class="pimg wipe" data-tilt><div class="pimg__in"><img src="${HERO}" alt="Residential building photo from the VTech homepage" loading="lazy" width="1024" height="768"></div><span class="pimg__glare" aria-hidden="true"></span></figure>
     <figure class="pimg wipe wipe--late" data-tilt><div class="pimg__in"><img src="${IMG}WhatsApp-Image-2026-01-03-at-2.01.12-PM.jpeg.webp" alt="Folding glass doors photo from the VTech homepage" loading="lazy" width="678" height="452"></div><span class="pimg__glare" aria-hidden="true"></span></figure>
