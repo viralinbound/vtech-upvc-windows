@@ -1249,3 +1249,34 @@ html{scroll-padding-top:0}
 .btn--enq span,.btn--enq svg{position:relative;z-index:3}
 @media (prefers-reduced-motion:reduce){.btn--enq,.top>.btn--red,.fab,.mbar__q{animation:none!important}.btn--enq::after,.top>.btn--red::after,.fab::after,.mbar__q::after{display:none}}
 
+
+/* ===== v19: no decorative lines anywhere (borders, rules, dashes, connectors). Shape comes from fills and soft shadow. ===== */
+*,*::before,*::after{border-color:transparent!important}
+/* pseudo-element and element lines */
+.kicker::before,.eyebrow i,.foot__tag i,.scroll i,.scroll,.story__ring,.frame-draw,.spine,.spine i,.hgal__bar,.progress,.top__nav a::after,
+.ben::after,.proc2__g::before,.proc2__g::after,.gr-act::before,.gr-opt::before,.spec::before,.gband__rule,.hero__after-s::before,.hero__after-s::after{display:none!important}
+.kicker{gap:0}
+/* soft shadow instead of a border so cards, chips and fields keep their shape */
+.ben,.fin2__c,.gr-card,.warranty,.pimg,.form,.gr-ask,.faq__item,.gr__badge,.gr-nav{box-shadow:0 14px 34px -22px rgba(1,42,99,.38)}
+.faq__item{background:#fff;margin-bottom:10px;border-radius:14px}
+.gr-ask__r .gr-act{box-shadow:0 8px 22px -16px rgba(1,42,99,.35)}
+.gr-f,.gr-time,.lchip{background:#EEF3FA}
+.gr-f.is-on,.gr-time.is-on{background:#02409A}
+.lchip[aria-pressed=true]{background:#CFE4F7;box-shadow:inset 0 0 0 0 transparent;color:#012A63}
+.gr-opt{background:#EEF3FA}.gr-opt[aria-pressed=true]{background:#02409A}
+.gr-ghost{background:#E6EEF8;color:#02409A}.gr-ghost:hover{background:#02409A;color:#fff}
+.btn--ghost{background:rgba(255,255,255,.16)}
+.btn--enq,.top>.btn--red,.fab,.mbar__q{box-shadow:0 16px 34px -12px rgba(2,64,154,.85),0 0 0 4px rgba(110,193,228,.38)!important}
+.lf input,.lf select,.gr-fld input{background:#EEF3FA}
+.f input,.f select,.f textarea{background:rgba(255,255,255,.1)}
+/* keep focus and error states readable without borders */
+input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(2,64,154,.45)!important}
+[aria-invalid=true]{box-shadow:0 0 0 2px #01306F!important}
+.sw{border-color:rgba(1,42,99,.28)!important}
+.pnav__link.is-active,.pnav__link:hover{background:#E6EEF8}
+.pnav{box-shadow:0 10px 26px -20px rgba(1,42,99,.45)}
+.foot,.address,address{border-top:0}
+/* line overlays on photos + plain logo icon + hollow outline numerals become soft fills */
+.corners,.hero__frame,.hero__grid,.panes,.mullion{display:none!important}
+.brand img{background:none!important;border-radius:0!important;box-shadow:none!important;padding:0}
+.prod__ghost,.gband__no{-webkit-text-stroke:0!important;color:rgba(2,64,154,.08)!important}
