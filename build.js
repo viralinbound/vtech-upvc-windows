@@ -6,6 +6,7 @@ const { PRODUCTS, GROUPS } = require('./data.js');
 
 const U = 'https://vtechwindows.com/wp-content/uploads/';
 // Every image is downloaded from vtechwindows.com into assets/img (same files, served locally so they always load).
+const REV = require('./reviews-section.js')({ formHref: '#lead' });
 const IMG = 'assets/img/';
 // Real images used on each product page of vtechwindows.com (found in the page HTML). Captions state provenance honestly.
 const PHOTOS = {
@@ -205,7 +206,7 @@ const html = `<!doctype html>
 <header class="top" id="top">
   <a class="brand" href="https://vtechwindows.com/" aria-label="VTech home"><img src="${IMG}cropped-vtech-new-logo-150x150.png" alt="VTech" width="40" height="40"><span><b>V-TECH</b> uPVC Windows &amp; Doors</span></a>
   <nav class="top__nav" aria-label="Page sections">
-    <a href="#products">Products</a><a href="#benefits">Why uPVC</a><a href="#process">Process</a><a href="#gallery2">Gallery</a><a href="#faq">FAQ</a><a href="#enquiry">Contact</a>
+    <a href="#products">Products</a><a href="#benefits">Why uPVC</a><a href="#process">Process</a><a href="#reviews">Reviews</a><a href="#enquiry">Contact</a>
   </nav>
   <a class="tel" href="tel:+919740422863" aria-label="Call +91 97404 22863"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg><span>+91 97404 22863</span></a>
   <a class="btn btn--red btn--sm" href="#enquiry" data-magnetic><span>Get Free Quote</span></a>
@@ -327,6 +328,8 @@ ${sections}
   </div>
   <p class="pimg__cap">Real images from the VTech homepage. VTech does not name these projects.</p>
 </section>
+
+${REV}
 
 <section class="faq" id="faq" aria-labelledby="faq-h">
   <div class="faq__head"><p class="kicker reveal">Questions</p><h2 id="faq-h" data-split>Good to know.</h2></div>
