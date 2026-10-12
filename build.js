@@ -191,7 +191,7 @@ const html = `<!doctype html>
 <link rel="icon" href="${IMG}cropped-vtech-new-logo-150x150.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="${HERO}">
 <script>document.documentElement.classList.add('js','loaded')</script>
 <link rel="stylesheet" href="styles.css?v=${V}">
@@ -208,7 +208,7 @@ const html = `<!doctype html>
     <a href="#map">Collection</a><a href="#about">About</a><a href="#explorer">Product Finder</a><a href="#benefits">Why uPVC</a><a href="#projects">Projects</a><a href="#faq">FAQ</a>
   </nav>
   <a class="tel" href="tel:+919740422863" aria-label="Call +91 97404 22863"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg><span>+91 97404 22863</span></a>
-  <a class="btn btn--red btn--sm" href="#enquiry" data-magnetic><span>Request a Quote</span></a>
+  <a class="btn btn--red btn--sm" href="#enquiry" data-magnetic><span>Get Free Quote</span></a>
 </header>
 
 <div class="hero-pin" data-pin>
@@ -239,6 +239,12 @@ const html = `<!doctype html>
 
 <div class="marquee" aria-hidden="true"><div class="marquee__t">${marquee}${marquee}</div></div>
 
+<section class="sband" aria-label="Figures as stated by VTech"><div class="sband__in">
+  <div class="reveal"><b><em data-count="1">1</em> Lakh+</b><span>Happy customers</span></div>
+  <div class="reveal" style="--d:90ms"><b><em data-count="200">200</em>+</b><span>Projects completed</span></div>
+  <div class="reveal" style="--d:180ms"><b><em data-count="20">20</em>+</b><span>Years of experience</span></div>
+  <div class="reveal" style="--d:270ms"><b><em data-count="5">5</em>+</b><span>Quality certifications</span></div>
+</div><p>Figures as stated by VTech.</p></section>
 <main id="collection">
 <section class="map" id="map" aria-labelledby="map-h">
   <div class="map__head">
@@ -379,6 +385,10 @@ ${sections}
   </div>
 </section>
 
+<section class="fin2" aria-labelledby="fin-h"><div class="sec2__head"><p class="kicker reveal">Finishes</p><h2 id="fin-h" data-split>Choose a finish that fits your home.</h2><p class="lead reveal">Foil-laminated finishes that won’t fade, peel or need repainting.</p></div><ul class="fin2__g"><li class="fin2__c reveal" style="--d:0ms"><img src="assets/v2/finish-white.webp" alt="Classic White finish sample" width="500" height="500" loading="lazy"><div><h3>Classic White</h3><p>Timeless. The most popular choice.</p></div></li><li class="fin2__c reveal" style="--d:90ms"><img src="assets/v2/finish-oak.webp" alt="Golden Oak finish sample" width="500" height="500" loading="lazy"><div><h3>Golden Oak</h3><p>Warm wood-grain laminate.</p></div></li><li class="fin2__c reveal" style="--d:180ms"><img src="assets/v2/finish-walnut.webp" alt="Dark Walnut finish sample" width="500" height="500" loading="lazy"><div><h3>Dark Walnut</h3><p>Rich teak-like finish.</p></div></li><li class="fin2__c reveal" style="--d:270ms"><img src="assets/v2/finish-grey.webp" alt="Anthracite Grey finish sample" width="500" height="500" loading="lazy"><div><h3>Anthracite Grey</h3><p>Modern, architectural look.</p></div></li></ul></section>
+
+<section class="gal2" aria-labelledby="g2-h"><div class="sec2__head"><p class="kicker reveal">Gallery</p><h2 id="g2-h" data-split>Windows that change a room.</h2><p class="lead reveal">Images published on VTech’s landing page, windows.vtechwindows.com.</p></div><div class="gal2__g"><figure class="gal2__c reveal" style="--d:0ms"><img src="assets/v2/gallery-1.webp" alt="Modern home exterior with Casement + Fixed, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Casement + Fixed</span><b>Modern home exterior</b></figcaption></figure><figure class="gal2__c reveal" style="--d:110ms"><img src="assets/v2/gallery-2.webp" alt="Tower balcony with Multi-Sliding Doors, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Multi-Sliding Doors</span><b>Tower balcony</b></figcaption></figure><figure class="gal2__c reveal" style="--d:220ms"><img src="assets/v2/gallery-3.webp" alt="Independent villa with Casement + Fixed, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Casement + Fixed</span><b>Independent villa</b></figcaption></figure><figure class="gal2__c reveal" style="--d:0ms"><img src="assets/v2/gallery-4.webp" alt="High-rise apartment with Fixed Glazing, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Fixed Glazing</span><b>High-rise apartment</b></figcaption></figure><figure class="gal2__c reveal" style="--d:110ms"><img src="assets/v2/gallery-5.webp" alt="Garden-facing villa with French Door, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>French Door</span><b>Garden-facing villa</b></figcaption></figure><figure class="gal2__c reveal" style="--d:220ms"><img src="assets/v2/gallery-6.webp" alt="Bedroom with Soundproof Casement, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Soundproof Casement</span><b>Bedroom</b></figcaption></figure></div></section>
+
 <section class="projects" id="projects" aria-labelledby="pr-h">
   <p class="kicker reveal">Projects</p>
   <h2 id="pr-h" data-split>See installed work.</h2>
@@ -389,6 +399,8 @@ ${sections}
     <a class="pcard reveal" style="--d:180ms" href="https://vtechfacades.com/" target="_blank" rel="noopener"><span>Site</span><strong>VTech Facades</strong><em>vtechfacades.com</em>${arrow}</a>
   </div>
 </section>
+
+<section class="proc2" id="process" aria-labelledby="pc-h"><div class="sec2__head"><p class="kicker reveal">Our process</p><h2 id="pc-h" data-split>How it works.</h2><p class="lead reveal">Measurement, design, manufacturing and installation, all handled in-house.</p></div><ol class="proc2__g" data-p><li class="proc2__s"><i>01</i><h3>Book free visit</h3><p>Share your details. An expert visits at a time that suits you.</p></li><li class="proc2__s"><i>02</i><h3>Site measurement</h3><p>Accurate measurement and design recommendations for every opening.</p></li><li class="proc2__s"><i>03</i><h3>Custom manufacturing</h3><p>Made in VTech’s Bengaluru factory with European-grade profiles.</p></li><li class="proc2__s"><i>04</i><h3>Installation & warranty</h3><p>Clean installation by VTech’s own team, backed by a manufacturer warranty.</p></li></ol></section>
 
 <section class="faq" id="faq" aria-labelledby="faq-h">
   <div class="faq__head"><p class="kicker reveal">Questions</p><h2 id="faq-h" data-split>Good to know.</h2></div>
@@ -436,7 +448,8 @@ ${sections}
   <p>© V-Tech Building Systems Pvt. Ltd · <a href="https://vtechwindows.com/" target="_blank" rel="noopener">vtechwindows.com</a> · <a href="https://vtechwindows.com/contact-html/" target="_blank" rel="noopener">Contact</a> · <a href="https://vtechfacades.com/" target="_blank" rel="noopener">Facades</a> · <a href="https://vtechwindows.com/v-tech-fosroc/" target="_blank" rel="noopener">Fosroc</a> · <a href="https://www.linkedin.com/company/v-tech-building-systems-pvt-ltd" target="_blank" rel="noopener">LinkedIn</a></p>
 </footer>
 
-<a class="fab" href="#enquiry" data-magnetic aria-label="Request a quote"><span>Get a Quote</span></a>
+<a class="fab" href="#enquiry" data-magnetic aria-label="Request a quote"><span>Get Free Quote</span></a>
+<div class="mbar"><a href="tel:+919740422863" class="mbar__call">Call Now</a><a href="#enquiry" class="mbar__q">Free Quote →</a></div>
 
 <script>window.VTECH={products:${productJson},groups:${groupJson},endpoint:'',email:'vtechbuildingsystems@gmail.com'};</script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
