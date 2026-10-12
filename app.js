@@ -53,6 +53,7 @@ const hgal = $('.hgal'), track = $('.hgal__track'), hbar = $('.hgal__bar i');
 let lastY = scrollY, ticking = false, mx = 0, my = 0;
 function sizeGallery() {
   
+  if (!hgal) return;
   hgal.style.setProperty('--travel', Math.max(0, track.scrollWidth - innerWidth) + 'px');
 }
 function onScroll() {
@@ -64,7 +65,7 @@ function onScroll() {
   lastY = y;
   fab.classList.toggle('is-off', y < innerHeight * 0.6 || $('#enquiry').getBoundingClientRect().top < innerHeight);
   if (!reduce && y < innerHeight * 1.2) heroMedia.style.transform = `translate3d(${mx * -18}px, ${my * -12}px, 0)`;
-  if (!reduce) {
+  if (!reduce && hgal) {
     const r = hgal.getBoundingClientRect(), travel = hgal.offsetHeight - innerHeight;
     const k = Math.min(1, Math.max(0, -r.top / travel));
     track.style.transform = `translate3d(${-k * (track.scrollWidth - innerWidth)}px,0,0)`;
@@ -199,6 +200,7 @@ form.addEventListener('submit', async (e) => {
 
 /* ---------- product finder (real photos from vtechwindows.com) ---------- */
 const exImg = $('#exImg');
+if (exImg) {
 let exProduct = CFG.products[0];
 function exShow(animate) {
   const apply = () => {
@@ -215,6 +217,7 @@ function exShow(animate) {
 $$('input[name=xtype]').forEach((r) => r.addEventListener('change', () => { exProduct = CFG.products.find((p) => p.id === r.dataset.id); exShow(true); }));
 $('#exQuote').addEventListener('click', (e) => { e.preventDefault(); prefill(exProduct.group, exProduct.name); history.replaceState(null, '', '#enquiry'); });
 exShow(false);
+}
 
 /* =================== v3: extra motion =================== */
 /* smooth scrolling (Lenis) — skipped for reduced motion and touch devices */
@@ -663,4 +666,26 @@ void main(){
   addEventListener('resize', req);
   update();
 })();
+})();
+
+
+/* =================== v11: hero lead form (windows.vtechwindows.com style) =================== */
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const f = $('#lead'); if (!f) return;
+  const st = $('.lead__st', f), col = $('input[name=colour]', f);
+  $$('.lchip', f).forEach((c) => c.addEventListener('click', () => { $$('.lchip', f).forEach((x) => x.setAttribute('aria-pressed', x === c)); col.value = c.dataset.v; }));
+  const R = { first: (v) => (v.trim().length < 2 ? 'Please enter your name.' : ''), phone: (v) => (v.replace(/\D/g, '').length < 10 ? 'Enter a valid phone number (at least 10 digits).' : '') };
+  const ck = (el) => { const r = R[el.name]; if (!r) return true; const m = r(el.value), e = el.closest('.lf').querySelector('.err'); if (e) e.textContent = m; el.setAttribute('aria-invalid', !!m); return !m; };
+  $$('input', f).forEach((el) => el.addEventListener('blur', () => ck(el)));
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const bad = $$('input', f).filter((el) => R[el.name] && !ck(el));
+    if (bad.length) { st.className = 'lead__st bad'; st.textContent = 'Please fix the highlighted fields.'; bad[0].focus(); return; }
+    const d = Object.fromEntries(new FormData(f)); if (d.website) return;
+    const t = [['Name', (d.first + ' ' + (d.last || '')).trim()], ['Phone', d.phone], ['Product', d.product], ['Colour preference', d.colour]].filter((x) => x[1] && x[1].trim()).map((x) => x[0] + ': ' + x[1]).join('\n');
+    location.href = 'mailto:vtechbuildingsystems@gmail.com?subject=' + encodeURIComponent('Free site consultation request: ' + (d.product || 'uPVC windows')) + '&body=' + encodeURIComponent(t);
+    st.className = 'lead__st ok';
+    st.innerHTML = 'Your email app should now open with these details. <b>It is not sent until you press Send there.</b> Or call <a href="tel:+919740422863">+91 97404 22863</a>.';
+  });
 })();

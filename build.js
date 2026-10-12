@@ -205,7 +205,7 @@ const html = `<!doctype html>
 <header class="top" id="top">
   <a class="brand" href="https://vtechwindows.com/" aria-label="VTech home"><img src="${IMG}cropped-vtech-new-logo-150x150.png" alt="VTech" width="40" height="40"><span><b>V-TECH</b> uPVC Windows &amp; Doors</span></a>
   <nav class="top__nav" aria-label="Page sections">
-    <a href="#map">Collection</a><a href="#about">About</a><a href="#explorer">Product Finder</a><a href="#benefits">Why uPVC</a><a href="#projects">Projects</a><a href="#faq">FAQ</a>
+    <a href="#products">Products</a><a href="#benefits">Why uPVC</a><a href="#process">Process</a><a href="#gallery2">Gallery</a><a href="#faq">FAQ</a><a href="#enquiry">Contact</a>
   </nav>
   <a class="tel" href="tel:+919740422863" aria-label="Call +91 97404 22863"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg><span>+91 97404 22863</span></a>
   <a class="btn btn--red btn--sm" href="#enquiry" data-magnetic><span>Get Free Quote</span></a>
@@ -224,15 +224,22 @@ const html = `<!doctype html>
     <p class="eyebrow">VTECH <i></i> uPVC WINDOWS &amp; DOORS</p>
     <h1 id="h1"><span class="ln"><span>A Better View.</span></span><span class="ln ln--it"><span>A Better Way to Live.</span></span></h1>
     <p class="hero__p">Casement windows, French doors, multi sliding doors and sliding windows from a Bengaluru manufacturer using German uPVC profile technology.</p>
-    <div class="hero__cta"><a class="btn btn--red" href="#map" data-magnetic><span>Explore Our Collection</span></a><a class="btn btn--ghost" href="#enquiry" data-magnetic><span>Request a Quote</span></a></div>
+    <div class="hero__cta"><a class="btn btn--red" href="#lead" data-magnetic><span>Book Free Site Visit →</span></a><a class="btn btn--ghost" href="tel:+919740422863" data-magnetic><span>Call +91 97404 22863</span></a></div>
   </div>
-  <aside class="hero__card" aria-label="At a glance">
-    <div><b data-count="${total}">${total}</b><span>window &amp; door systems</span></div>
-    <div><b data-count="15">15</b><span>yr uPVC profile warranty*</span></div>
-    <div><b data-count="10">10</b><span>yr hardware warranty*</span></div>
-    <p>*As shown on VTech’s product pages.</p>
-  </aside>
-  <a class="scroll" href="#map" aria-label="Scroll to collection"><i></i><span>Scroll</span></a>
+  <form class="lform" id="lead" novalidate aria-labelledby="lead-h">
+    <span class="lead__rb">Free consultation</span>
+    <h2 id="lead-h">Book Free Site Consultation</h2>
+    <p class="lead__sub">An expert will visit, measure &amp; quote, free of charge.</p>
+    <div class="lead__row"><div class="lf"><label for="lfirst">First name <b>*</b></label><input id="lfirst" name="first" autocomplete="given-name" placeholder="Your name"><small class="err"></small></div><div class="lf"><label for="llast">Last name</label><input id="llast" name="last" autocomplete="family-name"></div></div>
+    <div class="lf"><label for="lphone">Phone <b>*</b></label><input id="lphone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91"><small class="err"></small></div>
+    <div class="lf"><label for="lprod">Product</label><select id="lprod" name="product"><option value="">Not sure yet</option>${PRODUCTS.map((p) => `<option>${p.name}</option>`).join('')}</select></div>
+    <div class="lf"><span class="lf__l">Colour preference</span><div class="lchips" role="group" aria-label="Colour preference">${[['White', 'white'], ['Wooden Finish', 'wood'], ['Grey', 'grey'], ['Black', 'black']].map(([l, c], i) => `<button type="button" class="lchip" data-v="${l}" aria-pressed="${i === 0}"><span class="sw sw--${c}"></span>${l}</button>`).join('')}</div><input type="hidden" name="colour" value="White"></div>
+    <label class="hp" aria-hidden="true">Leave blank<input name="website" tabindex="-1" autocomplete="off"></label>
+    <button class="btn btn--red lead__go" type="submit"><span>Submit Details →</span></button>
+    <p class="lead__st" role="status" aria-live="polite"></p>
+    <p class="lead__legal">🔒 Used only to contact you about this request.</p>
+  </form>
+  <a class="scroll" href="#benefits" aria-label="Scroll to collection"><i></i><span>Scroll</span></a>
   <p class="hero__credit">Photo · vtechwindows.com</p>
 </section>
 </div>
@@ -246,32 +253,28 @@ const html = `<!doctype html>
   <div class="reveal" style="--d:270ms"><b><em data-count="5">5</em>+</b><span>Quality certifications</span></div>
 </div><p>Figures as stated by VTech.</p></section>
 <main id="collection">
-<section class="map" id="map" aria-labelledby="map-h">
-  <div class="map__head">
-    <p class="kicker reveal">The collection map</p>
-    <h2 id="map-h" data-split>Ten systems. Four families.</h2>
-    <p class="lead reveal">Every uPVC window and door system VTech lists, mapped in one place. Every photo and fact on this page comes from VTech’s own website.</p>
+
+<section class="benefits" id="benefits" aria-labelledby="ben-h">
+  <div class="benefits__head"><p class="kicker reveal">Why uPVC</p><h2 id="ben-h" data-split>Built to be lived with, not looked after.</h2></div>
+  <ul class="benefits__grid bento">${benefitsHtml}</ul>
+  <div class="benefits__foot">
+    <figure class="warranty reveal"><img src="${IMG}Icon-ultrain-ex-final-640x158-1.png.webp" alt="VTech graphic: premium profiles, 15 year uPVC profile warranty, 10 year hardware warranty, weather resistant, low maintenance" loading="lazy" width="640" height="158"><figcaption>Graphic shown on VTech’s product pages. Warranty terms are not published on the site, so please confirm them with VTech.</figcaption></figure>
+    <div class="tt reveal">
+      <h3>Published on the Tilt and Turn page</h3>
+      <dl><div><dt>System</dt><dd>70 mm casement</dd></div><div><dt>Uf value</dt><dd>1.4 W/m²K</dd></div><div><dt>Sound reduction</dt><dd>43 dB</dd></div><div><dt>Profile standard</dt><dd>EN 12608</dd></div><div><dt>Weathering</dt><dd>6,000 h xenon arc test</dd></div></dl>
+      <p class="note">Figures apply to VTech’s Tilt and Turn casement system only. <a href="https://vtechwindows.com/upvc-windows-manufacturers-in-bangalore-html/" target="_blank" rel="noopener">Why uPVC?</a></p>
+    </div>
   </div>
-  <div class="map__grid" data-p>${mapHtml}</div>
 </section>
 
-<section class="index" id="index" aria-labelledby="idx-h">
-  <div class="index__head"><p class="kicker reveal">All systems</p><h2 id="idx-h" data-split>Jump to any window or door.</h2></div>
-  <ol class="idx">${indexHtml}</ol>
-  <div class="idx__float" aria-hidden="true"><img src="${PHOTOS[PRODUCTS[0].id][0][0]}" alt="" width="640" height="522" loading="lazy"></div>
-</section>
+<section class="fin2" aria-labelledby="fin-h"><div class="sec2__head"><p class="kicker reveal">Finishes</p><h2 id="fin-h" data-split>Choose a finish that fits your home.</h2><p class="lead reveal">Foil-laminated finishes that won’t fade, peel or need repainting.</p></div><ul class="fin2__g"><li class="fin2__c reveal" style="--d:0ms"><img src="assets/v2/finish-white.webp" alt="Classic White finish sample" width="500" height="500" loading="lazy"><div><h3>Classic White</h3><p>Timeless. The most popular choice.</p></div></li><li class="fin2__c reveal" style="--d:90ms"><img src="assets/v2/finish-oak.webp" alt="Golden Oak finish sample" width="500" height="500" loading="lazy"><div><h3>Golden Oak</h3><p>Warm wood-grain laminate.</p></div></li><li class="fin2__c reveal" style="--d:180ms"><img src="assets/v2/finish-walnut.webp" alt="Dark Walnut finish sample" width="500" height="500" loading="lazy"><div><h3>Dark Walnut</h3><p>Rich teak-like finish.</p></div></li><li class="fin2__c reveal" style="--d:270ms"><img src="assets/v2/finish-grey.webp" alt="Anthracite Grey finish sample" width="500" height="500" loading="lazy"><div><h3>Anthracite Grey</h3><p>Modern, architectural look.</p></div></li></ul></section>
 
-<section class="statement" aria-label="VTech vision and mission">
-  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
-  <p class="kicker">Vision &amp; mission</p>
-  <p class="statement__t" data-highlight>Create timeless fabrication pieces and become clients’ first choice, with high-quality, environmentally friendly products, world-class designs, competitive pricing and long service life.</p>
-  <p class="note">From the About page of vtechwindows.com</p>
-</section>
-
-<div class="spine-wrap" data-pin>
+<div class="spine-wrap" id="products" data-pin>
 <nav class="pnav" id="pnav" aria-label="uPVC window and door systems"><div class="pnav__in">${navHtml}</div></nav><div class="spine" aria-hidden="true"><i></i><b></b></div>
 ${sections}
 </div>
+
+<section class="gal2" id="gallery2" aria-labelledby="g2-h"><div class="sec2__head"><p class="kicker reveal">Gallery</p><h2 id="g2-h" data-split>Windows that change a room.</h2><p class="lead reveal">Images published on VTech’s landing page, windows.vtechwindows.com.</p></div><div class="gal2__g"><figure class="gal2__c reveal" style="--d:0ms"><img src="assets/v2/gallery-1.webp" alt="Modern home exterior with Casement + Fixed, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Casement + Fixed</span><b>Modern home exterior</b></figcaption></figure><figure class="gal2__c reveal" style="--d:110ms"><img src="assets/v2/gallery-2.webp" alt="Tower balcony with Multi-Sliding Doors, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Multi-Sliding Doors</span><b>Tower balcony</b></figcaption></figure><figure class="gal2__c reveal" style="--d:220ms"><img src="assets/v2/gallery-3.webp" alt="Independent villa with Casement + Fixed, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Casement + Fixed</span><b>Independent villa</b></figcaption></figure><figure class="gal2__c reveal" style="--d:0ms"><img src="assets/v2/gallery-4.webp" alt="High-rise apartment with Fixed Glazing, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Fixed Glazing</span><b>High-rise apartment</b></figcaption></figure><figure class="gal2__c reveal" style="--d:110ms"><img src="assets/v2/gallery-5.webp" alt="Garden-facing villa with French Door, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>French Door</span><b>Garden-facing villa</b></figcaption></figure><figure class="gal2__c reveal" style="--d:220ms"><img src="assets/v2/gallery-6.webp" alt="Bedroom with Soundproof Casement, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Soundproof Casement</span><b>Bedroom</b></figcaption></figure></div></section>
 
 <section class="story" id="inside" aria-labelledby="st-h">
   <div class="story__sticky">
@@ -300,14 +303,6 @@ ${sections}
   </div>
 </section>
 
-<section class="hgal" id="gallery" aria-labelledby="gal-h">
-  <div class="hgal__sticky">
-    <div class="hgal__head"><p class="kicker">In pictures</p><h2 id="gal-h">The collection, frame by frame.</h2><p class="hgal__hint">Scroll to move through all ${total} systems</p></div>
-    <div class="hgal__track">${galHtml}</div>
-    <div class="hgal__bar" aria-hidden="true"><i></i></div>
-  </div>
-</section>
-
 <section class="zoom" aria-labelledby="zm-h">
   <div class="zoom__sticky">
     <figure class="zoom__frame"><img src="${IMG}WhatsApp-Image-2023-10-19-at-2.44.47-PM-1024x683.jpeg" alt="Interior photo from the VTech website" loading="lazy" width="1024" height="683"></figure>
@@ -319,29 +314,7 @@ ${sections}
   </div>
 </section>
 
-<section class="about" data-p id="about" aria-labelledby="ab-h">
-  <div class="about__copy">
-    <p class="kicker reveal">About V-Tech</p>
-    <h2 id="ab-h" data-split>Bengaluru’s uPVC doors and windows, made with German profile technology.</h2>
-    <p class="lead reveal">V-Tech Building Systems Pvt. Ltd is a uPVC doors and windows manufacturer and supplier in Bengaluru, Karnataka. Its products use German uPVC profile technology, and the company reports repeat orders from its customers.</p>
-    <dl class="vm">
-      <div class="reveal"><dt>Vision</dt><dd>Create timeless fabrication pieces and become clients’ first choice.</dd></div>
-      <div class="reveal" style="--d:80ms"><dt>Mission</dt><dd>Make high-quality, environmentally friendly products, offer world-class designs to various sectors, and provide competitive pricing and long service life.</dd></div>
-      <div class="reveal" style="--d:160ms"><dt>Values</dt><dd>Customer satisfaction, honouring commitments, transparent and lasting relationships, integrity and mutual trust, and an entrepreneurial, excellence-driven culture.</dd></div>
-    </dl>
-  </div>
-  <div class="about__side">
-    <figure class="pimg wipe" data-tilt><div class="pimg__in"><img src="${IMG}WhatsApp-Image-2023-10-19-at-2.44.47-PM-1024x683.jpeg" alt="Interior photo from the VTech website About page" loading="lazy" width="1024" height="683"></div><span class="pimg__glare" aria-hidden="true"></span></figure>
-    <p class="pimg__cap">Real image from vtechwindows.com · About page</p>
-    <ul class="stats" aria-label="Company figures as stated on vtechwindows.com">
-      <li class="reveal"><strong><span data-count="1">1</span> Lakh+</strong><span>happy customers</span></li>
-      <li class="reveal" style="--d:80ms"><strong><span data-count="200">200</span>+</strong><span>projects completed</span></li>
-      <li class="reveal" style="--d:160ms"><strong><span data-count="20">20</span>+</strong><span>years of experience</span></li>
-      <li class="reveal" style="--d:240ms"><strong><span data-count="5">5</span>+</strong><span>quality certifications</span></li>
-    </ul>
-    <p class="note">Figures as stated on VTech’s homepage. Serves residential construction, modular buildings, home renovation, holiday homes, hospitals, shopping malls, business complexes and independent bungalows.</p>
-  </div>
-</section>
+<section class="proc2" id="process" aria-labelledby="pc-h"><div class="sec2__head"><p class="kicker reveal">Our process</p><h2 id="pc-h" data-split>How it works.</h2><p class="lead reveal">Measurement, design, manufacturing and installation, all handled in-house.</p></div><ol class="proc2__g" data-p><li class="proc2__s"><i>01</i><h3>Book free visit</h3><p>Share your details. An expert visits at a time that suits you.</p></li><li class="proc2__s"><i>02</i><h3>Site measurement</h3><p>Accurate measurement and design recommendations for every opening.</p></li><li class="proc2__s"><i>03</i><h3>Custom manufacturing</h3><p>Made in VTech’s Bengaluru factory with European-grade profiles.</p></li><li class="proc2__s"><i>04</i><h3>Installation & warranty</h3><p>Clean installation by VTech’s own team, backed by a manufacturer warranty.</p></li></ol></section>
 
 <section class="clients" data-p id="clients" aria-labelledby="cl-h">
   <div class="clients__head"><p class="kicker reveal">Clientele</p><h2 id="cl-h" data-split>Trusted by public and private sector organisations.</h2></div>
@@ -354,53 +327,6 @@ ${sections}
   </div>
   <p class="pimg__cap">Real images from the VTech homepage. VTech does not name these projects.</p>
 </section>
-
-<section class="explorer" id="explorer" aria-labelledby="ex-h">
-  <div class="explorer__head">
-    <p class="kicker reveal">Product finder</p>
-    <h2 id="ex-h" data-split>Choose a system.</h2>
-    <p class="lead reveal">Pick any VTech system to see its real photo and verified details, then send it straight into a quote request.</p>
-  </div>
-  <div class="explorer__grid">
-    <figure class="explorer__view" data-tilt><div class="explorer__frame"><img id="exImg" src="${firstPhoto(PRODUCTS[0].id)}" alt="${esc(PRODUCTS[0].name)}" width="640" height="522"></div><span class="pimg__glare" aria-hidden="true"></span><figcaption id="exCap"></figcaption></figure>
-    <div class="explorer__panel">
-      <fieldset class="opts"><legend>System</legend><div class="opts__list">${explorerList}</div></fieldset>
-      <div class="explorer__info" aria-live="polite"><h3 id="exName"></h3><ul class="feat" id="exFeat"></ul><a class="link-arrow" id="exLink" href="#" target="_blank" rel="noopener">View Details${arrow}</a></div>
-      <a class="btn btn--red" id="exQuote" href="#enquiry" data-magnetic><span>Request a quote for this</span></a>
-      <p class="note">Colour options VTech lists are White and Wooden Finish; choose yours in the enquiry form.</p>
-    </div>
-  </div>
-</section>
-
-<section class="benefits" id="benefits" aria-labelledby="ben-h">
-  <div class="benefits__head"><p class="kicker reveal">Why uPVC</p><h2 id="ben-h" data-split>Built to be lived with, not looked after.</h2></div>
-  <ul class="benefits__grid bento">${benefitsHtml}</ul>
-  <div class="benefits__foot">
-    <figure class="warranty reveal"><img src="${IMG}Icon-ultrain-ex-final-640x158-1.png.webp" alt="VTech graphic: premium profiles, 15 year uPVC profile warranty, 10 year hardware warranty, weather resistant, low maintenance" loading="lazy" width="640" height="158"><figcaption>Graphic shown on VTech’s product pages. Warranty terms are not published on the site, so please confirm them with VTech.</figcaption></figure>
-    <div class="tt reveal">
-      <h3>Published on the Tilt and Turn page</h3>
-      <dl><div><dt>System</dt><dd>70 mm casement</dd></div><div><dt>Uf value</dt><dd>1.4 W/m²K</dd></div><div><dt>Sound reduction</dt><dd>43 dB</dd></div><div><dt>Profile standard</dt><dd>EN 12608</dd></div><div><dt>Weathering</dt><dd>6,000 h xenon arc test</dd></div></dl>
-      <p class="note">Figures apply to VTech’s Tilt and Turn casement system only. <a href="https://vtechwindows.com/upvc-windows-manufacturers-in-bangalore-html/" target="_blank" rel="noopener">Why uPVC?</a></p>
-    </div>
-  </div>
-</section>
-
-<section class="fin2" aria-labelledby="fin-h"><div class="sec2__head"><p class="kicker reveal">Finishes</p><h2 id="fin-h" data-split>Choose a finish that fits your home.</h2><p class="lead reveal">Foil-laminated finishes that won’t fade, peel or need repainting.</p></div><ul class="fin2__g"><li class="fin2__c reveal" style="--d:0ms"><img src="assets/v2/finish-white.webp" alt="Classic White finish sample" width="500" height="500" loading="lazy"><div><h3>Classic White</h3><p>Timeless. The most popular choice.</p></div></li><li class="fin2__c reveal" style="--d:90ms"><img src="assets/v2/finish-oak.webp" alt="Golden Oak finish sample" width="500" height="500" loading="lazy"><div><h3>Golden Oak</h3><p>Warm wood-grain laminate.</p></div></li><li class="fin2__c reveal" style="--d:180ms"><img src="assets/v2/finish-walnut.webp" alt="Dark Walnut finish sample" width="500" height="500" loading="lazy"><div><h3>Dark Walnut</h3><p>Rich teak-like finish.</p></div></li><li class="fin2__c reveal" style="--d:270ms"><img src="assets/v2/finish-grey.webp" alt="Anthracite Grey finish sample" width="500" height="500" loading="lazy"><div><h3>Anthracite Grey</h3><p>Modern, architectural look.</p></div></li></ul></section>
-
-<section class="gal2" aria-labelledby="g2-h"><div class="sec2__head"><p class="kicker reveal">Gallery</p><h2 id="g2-h" data-split>Windows that change a room.</h2><p class="lead reveal">Images published on VTech’s landing page, windows.vtechwindows.com.</p></div><div class="gal2__g"><figure class="gal2__c reveal" style="--d:0ms"><img src="assets/v2/gallery-1.webp" alt="Modern home exterior with Casement + Fixed, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Casement + Fixed</span><b>Modern home exterior</b></figcaption></figure><figure class="gal2__c reveal" style="--d:110ms"><img src="assets/v2/gallery-2.webp" alt="Tower balcony with Multi-Sliding Doors, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Multi-Sliding Doors</span><b>Tower balcony</b></figcaption></figure><figure class="gal2__c reveal" style="--d:220ms"><img src="assets/v2/gallery-3.webp" alt="Independent villa with Casement + Fixed, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Casement + Fixed</span><b>Independent villa</b></figcaption></figure><figure class="gal2__c reveal" style="--d:0ms"><img src="assets/v2/gallery-4.webp" alt="High-rise apartment with Fixed Glazing, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Fixed Glazing</span><b>High-rise apartment</b></figcaption></figure><figure class="gal2__c reveal" style="--d:110ms"><img src="assets/v2/gallery-5.webp" alt="Garden-facing villa with French Door, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>French Door</span><b>Garden-facing villa</b></figcaption></figure><figure class="gal2__c reveal" style="--d:220ms"><img src="assets/v2/gallery-6.webp" alt="Bedroom with Soundproof Casement, image from VTech" width="900" height="675" loading="lazy"><figcaption><span>Soundproof Casement</span><b>Bedroom</b></figcaption></figure></div></section>
-
-<section class="projects" id="projects" aria-labelledby="pr-h">
-  <p class="kicker reveal">Projects</p>
-  <h2 id="pr-h" data-split>See installed work.</h2>
-  <p class="lead reveal">VTech publishes its project photography as PDF portfolios. Open the originals below.</p>
-  <div class="projects__cards">
-    <a class="pcard reveal" href="${U}2023/10/Project-Pictures-1.pdf" target="_blank" rel="noopener"><span>PDF</span><strong>Project Pictures</strong><em>uPVC window projects</em>${arrow}</a>
-    <a class="pcard reveal" style="--d:90ms" href="${U}2023/10/Fundermax-Photos-1-1.pdf" target="_blank" rel="noopener"><span>PDF</span><strong>Facade Projects</strong><em>Fundermax facade photos</em>${arrow}</a>
-    <a class="pcard reveal" style="--d:180ms" href="https://vtechfacades.com/" target="_blank" rel="noopener"><span>Site</span><strong>VTech Facades</strong><em>vtechfacades.com</em>${arrow}</a>
-  </div>
-</section>
-
-<section class="proc2" id="process" aria-labelledby="pc-h"><div class="sec2__head"><p class="kicker reveal">Our process</p><h2 id="pc-h" data-split>How it works.</h2><p class="lead reveal">Measurement, design, manufacturing and installation, all handled in-house.</p></div><ol class="proc2__g" data-p><li class="proc2__s"><i>01</i><h3>Book free visit</h3><p>Share your details. An expert visits at a time that suits you.</p></li><li class="proc2__s"><i>02</i><h3>Site measurement</h3><p>Accurate measurement and design recommendations for every opening.</p></li><li class="proc2__s"><i>03</i><h3>Custom manufacturing</h3><p>Made in VTech’s Bengaluru factory with European-grade profiles.</p></li><li class="proc2__s"><i>04</i><h3>Installation & warranty</h3><p>Clean installation by VTech’s own team, backed by a manufacturer warranty.</p></li></ol></section>
 
 <section class="faq" id="faq" aria-labelledby="faq-h">
   <div class="faq__head"><p class="kicker reveal">Questions</p><h2 id="faq-h" data-split>Good to know.</h2></div>
