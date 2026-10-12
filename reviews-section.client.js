@@ -194,8 +194,9 @@
     setTimeout(function () {
       var f = inputs.filter(function (i) { return i.type !== 'hidden' && !i.value && i.tabIndex >= 0 && (i.name === 'first' || i.name === 'name' || i.name === 'phone' || i.name === 'email'); })[0] || phone || first;
       if (f) f.focus({ preventScroll: true });
-      target.classList.remove('gr-flash'); void target.offsetWidth; target.classList.add('gr-flash');
-      setTimeout(function () { target.classList.remove('gr-flash'); }, 1700);
+      target.style.transition = 'box-shadow .5s ease';
+      target.classList.add('gr-flash');
+      setTimeout(function () { target.classList.remove('gr-flash'); }, 1500);
     }, rm ? 80 : 1100);
   }
   $$('.gr-goform', document).forEach(function (a) { a.addEventListener('click', goForm); });

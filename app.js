@@ -887,8 +887,9 @@ void main(){
     setTimeout(function () {
       var f = inputs.filter(function (i) { return i.type !== 'hidden' && !i.value && i.tabIndex >= 0 && (i.name === 'first' || i.name === 'name' || i.name === 'phone' || i.name === 'email'); })[0] || phone || first;
       if (f) f.focus({ preventScroll: true });
-      target.classList.remove('gr-flash'); void target.offsetWidth; target.classList.add('gr-flash');
-      setTimeout(function () { target.classList.remove('gr-flash'); }, 1700);
+      target.style.transition = 'box-shadow .5s ease';
+      target.classList.add('gr-flash');
+      setTimeout(function () { target.classList.remove('gr-flash'); }, 1500);
     }, rm ? 80 : 1100);
   }
   $$('.gr-goform', document).forEach(function (a) { a.addEventListener('click', goForm); });
@@ -908,3 +909,8 @@ void main(){
   setTimeout(function () { measure(); sync(); }, 600);
 })();
 
+
+/* opening the page on #lead: the form lives in the pinned hero, so start at the very top */
+if (location.hash === '#lead') { const top = () => { document.querySelectorAll('.hero,.hero-pin').forEach((e) => { e.scrollTop = 0; e.scrollLeft = 0; }); scrollTo(0, 0); if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true }); }; top(); addEventListener('load', () => { top(); setTimeout(top, 120); }); }
+
+addEventListener('hashchange', () => { if (location.hash === '#lead') document.querySelectorAll('.hero,.hero-pin').forEach((e) => { e.scrollTop = 0; }); });
