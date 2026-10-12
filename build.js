@@ -184,7 +184,7 @@ const html = `<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>uPVC Windows &amp; Doors in Bengaluru | VTech</title>
 <meta name="description" content="Explore every VTech uPVC window and door system with real product photos: casement windows, French doors, multi sliding doors and sliding windows. Request a quote from the Bengaluru team.">
-<meta name="theme-color" content="#2B161B">
+<meta name="theme-color" content="#012A63">
 <meta property="og:title" content="uPVC Windows &amp; Doors | VTech">
 <meta property="og:description" content="Every VTech uPVC window and door system, with real photos. Request a quote.">
 <meta property="og:image" content="${U}2023/10/WhatsApp-Image-2023-10-03-at-6.30.43-PM.jpeg.webp">
