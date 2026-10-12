@@ -603,11 +603,22 @@ void main(){
 (() => {
   const groups = $$('.pgroup');
   const pnavH = () => $('.pnav').offsetHeight;
+  /* every product card must fit the visible window at 100% zoom: shrink a card only if its content is still taller than the screen */
+  function fitCards() {
+    const avail = innerHeight - pnavH() - 2;
+    $$('.prod').forEach((c) => {
+      c.style.zoom = '';
+      if (innerWidth <= 900) return;
+      const h = c.getBoundingClientRect().height;
+      if (h > avail) c.style.zoom = Math.max(0.74, avail / h).toFixed(3);
+    });
+  }
   function layout() {
+    fitCards();
     if (reduce) { $$('.prod').forEach((c) => { c.style.removeProperty('--stick'); c.style.removeProperty('--cover'); }); return; }
     const vh = innerHeight, top = pnavH();
     // tall cards stick when their bottom reaches the viewport bottom, so nothing is ever hidden
-    $$('.prod').forEach((c) => c.style.setProperty('--stick', Math.min(top, vh - c.offsetHeight) + 'px'));
+    $$('.prod').forEach((c) => c.style.setProperty('--stick', Math.min(top, vh - c.getBoundingClientRect().height) + 'px'));
   }
   function cover() {
     if (reduce) return;
