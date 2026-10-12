@@ -223,7 +223,7 @@ exShow(false);
 /* smooth scrolling (Lenis) — skipped for reduced motion and touch devices */
 let lenis = null;
 if (window.Lenis && !reduce && fine) {
-  lenis = new Lenis({ duration: 1.15, smoothWheel: true }); window.__lenis = lenis;
+  lenis = new Lenis({ duration: 1.35, smoothWheel: true, wheelMultiplier: 0.85 }); window.__lenis = lenis;
   (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
   const offset = () => -(document.querySelector('.pnav').offsetHeight + 8);
   document.addEventListener('click', (e) => {
