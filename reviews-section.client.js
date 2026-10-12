@@ -100,53 +100,113 @@
   if (!rm) timer = setInterval(function () { if (inView && !hold && !document.hidden) go(1); }, 5200);
 
   /* step-by-step quick enquiry */
-  var form = $('.gr-form'), prog = $('.gr-prog i', form), steps = $$('.gr-step', form), back = $('.gr-back', form), sum = $('.gr-sum', form), st = $('.gr-st2', form);
-  var ans = {}, cur = 1;
-  function show(n) {
-    cur = n;
-    steps.forEach(function (s, i) {
-      var on = i + 1 === n; s.hidden = !on; s.classList.toggle('is-on', on);
+  var form = $('.gr-form'), prog = $('.gr-prog i', form), steps = $$('.gr-step', form), stepLis = $$('.gr-steps li', form);
+  var back = $('.gr-back', form), sumBox = $('.gr-sum', form), st = $('.gr-st2', form), done = $('.gr-done');
+  var ans = {}, cur = 1, when = 'Any time';
+  function chips() {
+    sumBox.innerHTML = '';
+    [['need', 1], ['qty', 2]].forEach(function (p) {
+      if (!ans[p[0]]) return;
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'gr-chip'; b.setAttribute('data-edit', p[1]);
+      b.innerHTML = '<span></span><u>change</u>'; b.firstChild.textContent = (p[0] === 'qty' ? ans.qty + ' openings' : ans.need);
+      sumBox.appendChild(b);
     });
+  }
+  function show(n, focus) {
+    cur = n;
+    steps.forEach(function (s, i) { var on = i + 1 === n; s.hidden = !on; s.classList.toggle('is-on', on); });
+    stepLis.forEach(function (li, i) { li.classList.toggle('is-on', i + 1 === n); li.classList.toggle('is-done', i + 1 < n); });
     prog.style.setProperty('--p', (n / 3).toFixed(3));
-    back.hidden = n === 1;
-    sum.textContent = [ans.need, ans.qty].filter(Boolean).join(' · ');
+    back.hidden = n === 1; chips();
+    st.textContent = ''; st.className = 'gr-st2';
+    if (focus !== false) { var f = $('input:not([tabindex="-1"]),.gr-opt', steps[n - 1]); if (f && n === 3) f.focus({ preventScroll: true }); }
   }
   $$('.gr-opt', form).forEach(function (b) {
     b.addEventListener('click', function () {
       var k = b.getAttribute('data-k');
       $$('.gr-opt[data-k="' + k + '"]', form).forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      b.classList.remove('is-pop'); void b.offsetWidth; b.classList.add('is-pop');
       ans[k] = b.getAttribute('data-v');
-      setTimeout(function () { show(cur + 1); var f = $('input', steps[cur - 1]); if (f && cur === 3) f.focus({ preventScroll: true }); }, rm ? 0 : 240);
+      setTimeout(function () { show(cur + 1); }, rm ? 0 : 260);
+    });
+    /* arrow keys move between options, number keys pick one */
+    b.addEventListener('keydown', function (e) {
+      var sib = $$('.gr-opt', b.parentNode), i = sib.indexOf(b);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); sib[(i + 1) % sib.length].focus(); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); sib[(i - 1 + sib.length) % sib.length].focus(); }
+      var n = parseInt(e.key, 10); if (n >= 1 && n <= sib.length) { e.preventDefault(); sib[n - 1].click(); }
     });
   });
   back.addEventListener('click', function () { show(Math.max(1, cur - 1)); });
+  stepLis.forEach(function (li, i) { li.addEventListener('click', function () { if (i + 1 < cur) show(i + 1); }); });
+  sumBox.addEventListener('click', function (e) { var c = e.target.closest('.gr-chip'); if (c) show(+c.getAttribute('data-edit')); });
+  $$('.gr-time', form).forEach(function (b) {
+    b.addEventListener('click', function () {
+      $$('.gr-time', form).forEach(function (x) { var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
+      when = b.getAttribute('data-v');
+    });
+  });
   var rules = {
     name: function (v) { return v.trim().length < 2 ? 'Please enter your name.' : ''; },
     phone: function (v) { return v.replace(/\D/g, '').length < 10 ? 'Enter a valid phone number (at least 10 digits).' : ''; }
   };
-  function check(el) {
+  function check(el, soft) {
     var m = rules[el.name](el.value), e = el.parentNode.querySelector('.gr-err');
-    if (e) e.textContent = m; el.setAttribute('aria-invalid', !!m); return !m;
+    if (e) { e.className = 'gr-err' + (!m && el.value ? ' gr-ok' : ''); e.textContent = m ? (soft ? '' : m) : (el.value ? 'Looks good' : ''); }
+    el.setAttribute('aria-invalid', !!m && !soft); el.classList.toggle('is-valid', !m); return !m;
   }
-  $$('input[name=name],input[name=phone]', form).forEach(function (el) { el.addEventListener('blur', function () { check(el); }); });
+  var fields = $$('input[name=name],input[name=phone]', form);
+  fields.forEach(function (el) {
+    el.addEventListener('blur', function () {
+      if (el.name === 'phone') { var d = el.value.replace(/\D/g, ''); if (d.length === 10) el.value = d.slice(0, 5) + ' ' + d.slice(5); }
+      check(el);
+    });
+    el.addEventListener('input', function () { check(el, true); });
+  });
+  function mailto() {
+    var lines = ['Name: ' + form.elements.name.value.trim(), 'Phone: ' + form.elements.phone.value.trim(), 'Needs: ' + (ans.need || 'not chosen'), 'Number of openings: ' + (ans.qty || 'not chosen'), 'Best time to call: ' + when, 'Source: Quick enquiry next to Google reviews'];
+    return 'mailto:vtechbuildingsystems@gmail.com?subject=' + encodeURIComponent('Call back request: ' + (ans.need || 'uPVC windows and doors')) + '&body=' + encodeURIComponent(lines.join('\n'));
+  }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var bad = $$('input[name=name],input[name=phone]', form).filter(function (el) { return !check(el); });
+    var bad = fields.filter(function (el) { return !check(el); });
     if (bad.length) { st.className = 'gr-st2 bad'; st.textContent = 'Please fix the highlighted fields.'; bad[0].focus(); return; }
     if (form.elements.website.value) return;
-    var lines = ['Name: ' + form.elements.name.value.trim(), 'Phone: ' + form.elements.phone.value.trim(), 'Needs: ' + (ans.need || 'not chosen'), 'Number of openings: ' + (ans.qty || 'not chosen'), 'Source: Quick enquiry next to Google reviews'];
-    location.href = 'mailto:vtechbuildingsystems@gmail.com?subject=' + encodeURIComponent('Call back request: ' + (ans.need || 'uPVC windows and doors')) + '&body=' + encodeURIComponent(lines.join('\n'));
-    st.className = 'gr-st2 ok';
-    st.innerHTML = 'Your email app should now open with these details. <b>It is not sent until you press Send there.</b> No email app? Call <a href="tel:+919740422863">+91 97404 22863</a>.';
+    location.href = mailto();
+    form.hidden = true; done.hidden = false; done.focus({ preventScroll: true });
   });
+  $('.gr-again', done).addEventListener('click', function () { location.href = mailto(); });
+  $('.gr-reset', done).addEventListener('click', function () { ans = {}; when = 'Any time'; form.reset(); fields.forEach(function (f) { f.classList.remove('is-valid'); f.removeAttribute('aria-invalid'); var er = f.parentNode.querySelector('.gr-err'); if (er) er.textContent = ''; }); $$('.gr-opt', form).forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); $$('.gr-time', form).forEach(function (x, i) { x.classList.toggle('is-on', i === 0); x.setAttribute('aria-pressed', i === 0); }); done.hidden = true; form.hidden = false; show(1, false); });
+
+  /* "Full enquiry form": scroll to the real form, carry the name/phone over, focus the first empty field */
+  function goForm(e) {
+    var a = e.currentTarget, href = a.getAttribute('href'), t = href && href.charAt(0) === '#' ? document.querySelector(href) : null;
+    if (!t) return;
+    e.preventDefault(); e.stopPropagation();   // keep the page's own anchor handler from also scrolling
+    var pinned = t.closest('.hero-pin'), hdr = document.querySelector('.hdr,.top'), off = (hdr ? hdr.offsetHeight : 72) + 24;
+    var y = pinned ? 0 : Math.max(0, t.getBoundingClientRect().top + scrollY - off);
+    if (window.__lenis) window.__lenis.scrollTo(y, { duration: 1.4 }); else scrollTo({ top: y, behavior: rm ? 'auto' : 'smooth' });
+    var target = t.querySelector('form') || t;
+    var inputs = $$('input', target), nm = form.elements.name.value.trim(), ph = form.elements.phone.value.trim();
+    var first = inputs.filter(function (i) { return i.name === 'first' || i.name === 'name'; })[0], phone = inputs.filter(function (i) { return i.name === 'phone'; })[0];
+    function put(el, v) { if (el && v && !el.value) { el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); } }
+    put(first, nm); put(phone, ph);
+    setTimeout(function () {
+      var f = inputs.filter(function (i) { return i.type !== 'hidden' && !i.value && i.tabIndex >= 0 && (i.name === 'first' || i.name === 'name' || i.name === 'phone' || i.name === 'email'); })[0] || phone || first;
+      if (f) f.focus({ preventScroll: true });
+      target.classList.remove('gr-flash'); void target.offsetWidth; target.classList.add('gr-flash');
+      setTimeout(function () { target.classList.remove('gr-flash'); }, 1700);
+    }, rm ? 80 : 1100);
+  }
+  $$('.gr-goform', document).forEach(function (a) { a.addEventListener('click', goForm); });
 
   /* share with family */
   var share = $('.gr-share'), shareS = $('.gr-share__s');
   share.addEventListener('click', function () {
     var data = { title: document.title, text: 'Have a look at these uPVC windows and doors from V-Tech, Bengaluru.', url: location.href.split('#')[0] };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
-    var done = function () { shareS.textContent = 'Link copied. Paste it in your family chat.'; };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(data.url).then(done, function () { shareS.textContent = data.url; });
+    var ok = function () { shareS.textContent = 'Link copied. Paste it in your family chat.'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(data.url).then(ok, function () { shareS.textContent = data.url; });
     else shareS.textContent = data.url;
   });
 

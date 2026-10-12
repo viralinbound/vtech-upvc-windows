@@ -36,35 +36,46 @@ ${stars(r.stars)}<p class="gr-t">${esc(fix(r.text))}</p><button type="button" cl
 <button type="button" class="gr-nav gr-nav--p" aria-label="Previous reviews">←</button>
 <div class="gr__track" tabindex="0" role="region" aria-label="Google reviews, scroll sideways" aria-roledescription="carousel">
 ${cards}
-<article class="gr-card gr-card--cta"><span class="gr-cta__k">Your turn</span><h3>Want windows people write good things about?</h3><p>Book a free site visit. An expert measures your openings and gives a clear quote.</p><a class="gr-btn" href="${formHref}">Book free site visit →</a><a class="gr-lnk" href="https://search.google.com/local/writereview?placeid=${placeId}" target="_blank" rel="noopener">Already a customer? Write a review ↗</a></article>
+<article class="gr-card gr-card--cta"><span class="gr-cta__k">Your turn</span><h3>Want windows people write good things about?</h3><p>Book a free site visit. An expert measures your openings and gives a clear quote.</p><a class="gr-btn gr-goform" href="${formHref}">Book free site visit</a><a class="gr-lnk" href="https://search.google.com/local/writereview?placeid=${placeId}" target="_blank" rel="noopener">Already a customer? Write a review ↗</a></article>
 </div>
 <button type="button" class="gr-nav gr-nav--n" aria-label="Next reviews">→</button>
 </div>
 <div class="gr__bar"><span class="gr__count" aria-live="polite"></span><div class="gr__dots" aria-hidden="true"></div><a class="gr__all" href="https://www.google.com/maps/place/?q=place_id:${placeId}" target="_blank" rel="noopener">Read all ${total} on Google ↗</a></div>
 
-<div class="gr-ask">
+<div class="gr-ask" id="gr-ask">
 <div class="gr-ask__l">
 <p class="gr-ask__k">Quick enquiry · 20 seconds</p>
 <h3>Tell us what you need, we’ll call you back.</h3>
 <form class="gr-form" novalidate>
+<ol class="gr-steps" aria-label="Enquiry progress"><li class="is-on" data-s="1"><b>1</b><span>What</span></li><li data-s="2"><b>2</b><span>How many</span></li><li data-s="3"><b>3</b><span>Contact</span></li></ol>
 <div class="gr-prog" aria-hidden="true"><i></i></div>
-<fieldset class="gr-step is-on" data-step="1"><legend>1. What do you need?</legend><div class="gr-opts">
-<button type="button" class="gr-opt" data-k="need" data-v="Windows">\u{1FA9F} Windows</button><button type="button" class="gr-opt" data-k="need" data-v="Doors">\u{1F6AA} Doors</button><button type="button" class="gr-opt" data-k="need" data-v="Windows and doors">✨ Both</button></div></fieldset>
-<fieldset class="gr-step" data-step="2" hidden><legend>2. How many openings?</legend><div class="gr-opts">
-<button type="button" class="gr-opt" data-k="qty" data-v="1 to 3">1–3</button><button type="button" class="gr-opt" data-k="qty" data-v="4 to 8">4–8</button><button type="button" class="gr-opt" data-k="qty" data-v="9 to 15">9–15</button><button type="button" class="gr-opt" data-k="qty" data-v="More than 15">15+</button></div></fieldset>
-<fieldset class="gr-step" data-step="3" hidden><legend>3. Where can we reach you?</legend>
+<fieldset class="gr-step is-on" data-step="1"><legend>What do you need?</legend><div class="gr-opts gr-opts--3" role="group">
+<button type="button" class="gr-opt" data-k="need" data-v="Windows"><b>Windows</b><small>Casement, sliding, tilt and turn, fixed</small></button>
+<button type="button" class="gr-opt" data-k="need" data-v="Doors"><b>Doors</b><small>French and multi sliding doors</small></button>
+<button type="button" class="gr-opt" data-k="need" data-v="Windows and doors"><b>Both</b><small>Windows and doors together</small></button></div></fieldset>
+<fieldset class="gr-step" data-step="2" hidden><legend>How many openings?</legend><div class="gr-opts gr-opts--4" role="group">
+<button type="button" class="gr-opt" data-k="qty" data-v="1 to 3"><b>1–3</b><small>A room or two</small></button>
+<button type="button" class="gr-opt" data-k="qty" data-v="4 to 8"><b>4–8</b><small>A flat or small home</small></button>
+<button type="button" class="gr-opt" data-k="qty" data-v="9 to 15"><b>9–15</b><small>A full home</small></button>
+<button type="button" class="gr-opt" data-k="qty" data-v="More than 15"><b>15+</b><small>A large project</small></button></div></fieldset>
+<fieldset class="gr-step" data-step="3" hidden><legend>Where can we reach you?</legend>
+<div class="gr-sum" aria-live="polite"></div>
 <div class="gr-fld"><label for="gr-n">Your name <b>*</b></label><input id="gr-n" name="name" autocomplete="name"><small class="gr-err"></small></div>
 <div class="gr-fld"><label for="gr-p">Phone <b>*</b></label><input id="gr-p" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91"><small class="gr-err"></small></div>
+<div class="gr-fld"><span class="gr-lbl" id="gr-t-l">Best time to call</span><div class="gr-times" role="group" aria-labelledby="gr-t-l">
+<button type="button" class="gr-time is-on" data-v="Any time" aria-pressed="true">Any time</button><button type="button" class="gr-time" data-v="Morning (9 to 12)" aria-pressed="false">Morning</button><button type="button" class="gr-time" data-v="Afternoon (12 to 4)" aria-pressed="false">Afternoon</button><button type="button" class="gr-time" data-v="Evening (4 to 9)" aria-pressed="false">Evening</button></div></div>
 <label class="gr-hp" aria-hidden="true">Leave blank<input name="website" tabindex="-1" autocomplete="off"></label>
-<button class="gr-btn gr-btn--full" type="submit">Request a call back →</button></fieldset>
-<div class="gr-nav2"><button type="button" class="gr-back" hidden>← Back</button><span class="gr-sum" aria-live="polite"></span></div>
+<button class="gr-btn gr-btn--full" type="submit">Request a call back</button></fieldset>
+<div class="gr-nav2"><button type="button" class="gr-back" hidden>Back</button></div>
 <p class="gr-st2" role="status" aria-live="polite"></p>
-</form></div>
+</form>
+<div class="gr-done" hidden tabindex="-1"><p class="gr-ask__k">Almost done</p><h3>One last tap in your email app.</h3><p>Your email app should have opened with your details filled in. <b>The request is not sent until you press Send there.</b></p><div class="gr-done__a"><button type="button" class="gr-btn gr-again">Open the email again</button><button type="button" class="gr-ghost gr-reset">Start over</button><a class="gr-ghost" href="${tel}">Call ${phone}</a></div></div>
+</div>
 <div class="gr-ask__r">
 <p class="gr-ask__k">Prefer another way?</p>
-<a class="gr-act" href="${tel}"><i>☎</i><span><b>Call ${phone}</b><small>All days, 09:00 AM to 09:00 PM</small></span></a>
-<a class="gr-act" href="${formHref}"><i>\u{1F4CB}</i><span><b>Full enquiry form</b><small>Add your colour and product choice</small></span></a>
-<button type="button" class="gr-act gr-share"><i>\u{1F4E4}</i><span><b>Send this page to family</b><small class="gr-share__s">Share with whoever decides with you</small></span></button>
+<a class="gr-act" href="${tel}"><span><b>Call ${phone}</b><small>All days, 09:00 AM to 09:00 PM</small></span></a>
+<a class="gr-act gr-goform" href="${formHref}"><span><b>Full enquiry form</b><small>Takes you to the form. Your name and phone carry over.</small></span></a>
+<button type="button" class="gr-act gr-share"><span><b>Send this page to family</b><small class="gr-share__s">Share with whoever decides with you</small></span></button>
 </div></div>
 </div></section>`;
 };
