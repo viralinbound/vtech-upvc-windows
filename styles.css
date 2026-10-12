@@ -1319,3 +1319,20 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(2,64,154,.45)!
 .pnav__link:hover{background:#E6EEF8;color:#012A63}
 .pnav__link.is-active,.pnav__link.pnav__label.is-active{background:#02409A!important;color:#fff!important}
 .pnav__label{color:#012A63}
+
+/* ===== v22: one product on screen at a time ===== */
+@media (min-width:901px){
+  .prod{min-height:calc(100vh - var(--pnav,56px));align-content:center;box-sizing:border-box}
+  .pgroup>.prod:not(:last-of-type){margin-bottom:12vh}
+  .prod{opacity:1!important}
+}
+@media (min-width:901px){
+  .pgroup .prod{background:var(--paper,#F4F8FD)!important}
+  .pgroup:not(:last-of-type)>.prod:last-of-type{margin-bottom:12vh}
+  .pgroup{margin-block:0}
+}
+/* v23: plain flow, each product is its own full screen (no stacking/peeking) */
+@media (min-width:901px){
+  .pgroup .prod{position:relative!important;top:auto!important;scale:1!important;border-radius:0!important;box-shadow:none!important;margin-bottom:0!important;min-height:calc(100vh - 54px)!important;align-content:center}
+  .pgroup:not(:last-of-type)>.prod:last-of-type{margin-bottom:0!important}
+}
