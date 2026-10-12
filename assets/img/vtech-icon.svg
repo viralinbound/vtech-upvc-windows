@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="V-Tech">
+<rect x="14" y="14" width="84" height="84" rx="7" fill="#6EC1E4"/>
+<rect x="2" y="2" width="84" height="84" rx="7" fill="#02409A"/>
+<rect x="14" y="14" width="28" height="28" rx="2.5" fill="#fff"/>
+<rect x="46" y="14" width="28" height="28" rx="2.5" fill="#fff"/>
+<rect x="14" y="46" width="28" height="28" rx="2.5" fill="#fff"/>
+<rect x="46" y="46" width="28" height="28" rx="2.5" fill="#fff"/>
+</svg>

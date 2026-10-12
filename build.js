@@ -189,7 +189,7 @@ const html = `<!doctype html>
 <meta property="og:description" content="Every VTech uPVC window and door system, with real photos. Request a quote.">
 <meta property="og:image" content="${U}2023/10/WhatsApp-Image-2023-10-03-at-6.30.43-PM.jpeg.webp">
 <meta property="og:type" content="website">
-<link rel="icon" href="${IMG}cropped-vtech-new-logo-150x150.png">
+<link rel="icon" type="image/svg+xml" href="${IMG}vtech-icon.svg"><link rel="icon" type="image/png" sizes="32x32" href="${IMG}vtech-icon-32.png"><link rel="apple-touch-icon" href="${IMG}vtech-icon-180.png">
 
 <link rel="preload" as="image" href="${HERO}">
 <script>document.documentElement.classList.add('js','loaded')</script>
@@ -202,7 +202,7 @@ const html = `<!doctype html>
 <a class="skip" href="#collection">Skip to collection</a>
 
 <header class="top" id="top">
-  <a class="brand" href="https://vtechwindows.com/" aria-label="VTech home"><img src="${IMG}cropped-vtech-new-logo-150x150.png" alt="VTech" width="40" height="40"><span><b>V-TECH</b> uPVC Windows &amp; Doors</span></a>
+  <a class="brand" href="https://vtechwindows.com/" aria-label="VTech home"><img src="${IMG}vtech-icon.svg" alt="VTech" width="40" height="40"><span><b>V-TECH</b> uPVC Windows &amp; Doors</span></a>
   <nav class="top__nav" aria-label="Page sections">
     <a href="#products">Products</a><a href="#benefits">Why uPVC</a><a href="#process">Process</a><a href="#reviews">Reviews</a><a href="#enquiry">Contact</a>
   </nav>
