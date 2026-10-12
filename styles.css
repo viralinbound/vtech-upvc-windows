@@ -1373,3 +1373,7 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(2,64,154,.45)!
 
 /* v26: no numbers on top of images */
 .prod__ghost,.pimg__tag,.idx__n{display:none!important}
+/* v27: the two photos above Google reviews = same size */
+.real2{grid-template-columns:1fr 1fr!important;align-items:stretch}
+.real2 .pimg,.real2 .pimg__in{height:100%}
+.real2 .pimg img{width:100%;height:100%;aspect-ratio:3/2!important;object-fit:cover}
