@@ -1456,6 +1456,5 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(2,64,154,.45)!
   .pgroup .prod::after{content:"";position:absolute;inset:0;background:#011B42;opacity:calc(var(--cover,0) * .5);pointer-events:none;z-index:9}
   .pgroup .prod:not(:last-of-type){margin-bottom:0!important}
 }
-
-/* v34: real V-TECH logo (transparent) sits on a white tile over dark/photo headers */
-.brand img{background:#fff!important;border-radius:8px;padding:3px;object-fit:contain}
+/* v34: real V-TECH logo, transparent, no tile */
+.brand img{background:none!important;border-radius:0;padding:0;object-fit:contain}
