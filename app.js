@@ -225,7 +225,7 @@ let lenis = null;
 if (window.Lenis && !reduce && fine) {
   lenis = new Lenis({ lerp: 0.085, smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.4 }); window.__lenis = lenis;
   (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
-  const offset = () => -(document.querySelector('.pnav').offsetHeight + 8);
+  const offset = () => -(document.querySelector(".pnav").offsetHeight);
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (!a || a.hasAttribute('data-enquire') || a.id === 'exQuote') return;
@@ -939,4 +939,30 @@ addEventListener('hashchange', () => { if (location.hash === '#lead') document.q
   }
   function q() { if (!t) { t = true; requestAnimationFrame(upd); } }
   addEventListener('scroll', q, { passive: true }); addEventListener('resize', q); upd();
+})();
+
+/* v28: replay an entrance animation every time a product card comes into view */
+(function () {
+  var cards = [].slice.call(document.querySelectorAll('.prod'));
+  if (!cards.length || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.intersectionRatio >= 0.45) e.target.classList.add('is-live');
+      else if (e.intersectionRatio < 0.08) e.target.classList.remove('is-live');
+    });
+  }, { threshold: [0, 0.08, 0.45, 0.7] });
+  cards.forEach(function (c) { io.observe(c); });
+})();
+
+/* v28b: menu highlight follows the exact product on screen */
+(function () {
+  var prods = [].slice.call(document.querySelectorAll('.prod[id]')), t = false;
+  if (!prods.length) return;
+  function pick() {
+    t = false;
+    var y = innerHeight * 0.45, hit = null;
+    prods.forEach(function (p) { var r = p.getBoundingClientRect(); if (r.top <= y && r.bottom > y) hit = p; });
+    if (hit) setActive(hit.id);
+  }
+  addEventListener('scroll', function () { if (!t) { t = true; requestAnimationFrame(pick); } }, { passive: true });
 })();
