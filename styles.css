@@ -1447,3 +1447,12 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(2,64,154,.45)!
 @media (min-width:901px){.prod .pimg--main{flex:none!important;height:clamp(300px,calc(100vh - 54px - 150px),700px)!important;min-height:0}}
 @media (min-width:901px){.prod .pimg--inset{display:none!important}.prod__media:has(.pimg--inset) .pimg__cap{margin-top:10px;min-height:0;max-width:none}}
 .prail{display:none!important}
+
+/* ===== v33: next product slides over the previous one like a calendar page ===== */
+@media (min-width:901px) and (prefers-reduced-motion:no-preference){
+  .pgroup{position:relative}
+  .pgroup .prod{position:sticky!important;top:54px!important;height:calc(100vh - 54px);min-height:0!important;background:var(--paper,#F4F8FD)!important;border-radius:22px 22px 0 0!important;box-shadow:0 -28px 50px -30px rgba(1,27,66,.55)!important;
+    transform-origin:50% 100%;transform:perspective(1400px) rotateX(calc(var(--cover,0) * 7deg)) scale(calc(1 - var(--cover,0) * .06))!important;overflow:hidden}
+  .pgroup .prod::after{content:"";position:absolute;inset:0;background:#011B42;opacity:calc(var(--cover,0) * .5);pointer-events:none;z-index:9}
+  .pgroup .prod:not(:last-of-type){margin-bottom:0!important}
+}
