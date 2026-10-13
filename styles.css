@@ -1413,3 +1413,6 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(2,64,154,.45)!
 .prail a.is-cur i{background:#02409A;height:22px;border-radius:6px;transform:scaleX(1.2)}
 .prail a:hover i{background:#02409A;transform:scale(1.4)}
 .prail a.is-cur:hover i{transform:scaleX(1.2)}
+
+/* v30: straight marquee band */
+.marquee{transform:none!important;margin:0!important;box-shadow:none!important}
