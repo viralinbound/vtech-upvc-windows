@@ -150,7 +150,7 @@ const faqs = [
   ['What opening styles are available?', 'Inward and outward opening, top hung, tilt and turn, and fixed glazing casements; French doors; multi sliding doors; and two track, three track, monorail and fly mesh sliding windows.'],
   ['What colour and customisation options are offered?', 'VTech’s consultation form offers White and Wooden Finish colour preferences. The French Door page lists various colours, designs and hardware and both standard and custom sizes.'],
   ['Is double glazing available?', 'The Inward Outward Opening Windows page states that single or double glazing is available, and the Fly Mesh Sliding Windows page lists glass from 5 mm to 12 mm. Please confirm glazing for your chosen system when you request a quote.'],
-  ['How can I request a quotation?', 'Use the enquiry form on this page, or call +91 97404 22863 or +91 99801 11468, or email vtechbuildingsystems@gmail.com.'],
+  ['How can I request a quotation?', 'Use the enquiry form on this page, or call +91 97404 22863, or email vtechbuildingsystems@gmail.com.'],
   ['How can I arrange a consultation?', 'Call or email the VTech team, or visit the showroom at No. 693, M.N.S Arcade, 3rd Floor, Dr. Rajkumar Rd, 6th Block, Rajajinagar, Bengaluru 560010. Contact person listed: Mr. Bhargav, Executive Director.'],
 ];
 const faqHtml = faqs
@@ -164,7 +164,7 @@ const ld = {
   '@type': 'LocalBusiness',
   name: 'V-Tech Building Systems Pvt. Ltd',
   url: 'https://vtechwindows.com/',
-  telephone: ['+91 97404 22863', '+91 99801 11468'],
+  telephone: ['+91 97404 22863'],
   email: 'vtechbuildingsystems@gmail.com',
   address: { '@type': 'PostalAddress', streetAddress: 'No. 693, M.N.S Arcade, 3rd Floor, Dr. Rajkumar Rd, 6th Block, Rajajinagar', addressLocality: 'Bengaluru', addressRegion: 'Karnataka', postalCode: '560010', addressCountry: 'IN' },
 };
@@ -344,7 +344,6 @@ ${REV}
       <strong>V-Tech Building Systems Pvt. Ltd</strong>
       <span>Mr. Bhargav, Executive Director</span>
       <a href="tel:+919740422863">+91 97404 22863</a>
-      <a href="tel:+919980111468">+91 99801 11468</a>
       <a href="mailto:vtechbuildingsystems@gmail.com">vtechbuildingsystems@gmail.com</a>
       <span class="addr"><b>Showroom</b> No. 693, M.N.S Arcade, 3rd Floor, Dr. Rajkumar Rd, 6th Block, Rajajinagar, Bengaluru 560010</span>
       <span class="addr"><b>Hours</b> All days, 09:00 AM to 09:00 PM</span>

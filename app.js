@@ -192,7 +192,7 @@ form.addEventListener('submit', async (e) => {
     }
   } catch (err) {
     fstatus.className = 'form__status bad';
-    fstatus.innerHTML = 'We could not send your enquiry. Please call <a href="tel:+919740422863">+91 97404 22863</a> or <a href="tel:+919980111468">+91 99801 11468</a>.';
+    fstatus.innerHTML = 'We could not send your enquiry. Please call <a href="tel:+919740422863">+91 97404 22863</a>.';
   } finally {
     setTimeout(() => { busy = false; fsubmit.disabled = false; fsubmit.firstElementChild.textContent = 'Request a Quote'; }, 2500);
   }
