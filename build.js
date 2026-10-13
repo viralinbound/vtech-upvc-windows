@@ -177,7 +177,7 @@ const HERO = IMG + 'WhatsApp-Image-2023-10-03-at-6.30.43-PM.jpeg.webp';
 
 // cache-busting version so browsers always load the latest CSS/JS after a rebuild
 const V = Date.now().toString(36);
-const html = `<!doctype html>
+let html = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -384,5 +384,6 @@ ${REV}
 </body>
 </html>`;
 
+html = html.replace(/((?:assets\/(?:img|v2)|img2?)\/[^"' )?]+\.(?:webp|png|jpe?g|svg))/g, '$1?v=3');
 fs.writeFileSync(path.join(__dirname, 'index.html'), html);
 console.log('index.html written,', PRODUCTS.length, 'products');
