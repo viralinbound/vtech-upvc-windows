@@ -1393,3 +1393,23 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(2,64,154,.45)!
   .prod.is-live .prod__body>:nth-child(5){animation-delay:.36s}
   .prod.is-live .prod__body>:nth-child(n+6){animation-delay:.44s}
 }
+
+/* ===== v29: product scroll parallax + progress rail ===== */
+@media (min-width:901px) and (prefers-reduced-motion:no-preference){
+  .prod{--pp:0}
+  .prod .prod__media{transform:translateY(calc(var(--pp) * 46px)) rotate(calc(var(--pp) * -1.2deg));will-change:transform}
+  .prod .pimg--main img{transform:scale(calc(1.14 - (var(--pp) * var(--pp)) * .12)) translateY(calc(var(--pp) * -22px))}
+  .prod .prod__body{transform:translateY(calc(var(--pp) * -34px));opacity:calc(1 - (var(--pp) * var(--pp)) * .9)}
+  .prod .pimg--main .pimg__in{overflow:hidden}
+}
+.prail{position:fixed;right:clamp(10px,1.6vw,26px);top:50%;z-index:60;display:none;flex-direction:column;align-items:center;gap:10px;padding:14px 8px;border-radius:30px;background:rgba(255,255,255,.92);box-shadow:0 14px 40px -14px rgba(1,27,66,.5);transform:translate(24px,-50%);opacity:0;pointer-events:none;transition:opacity .4s,transform .5s var(--ease)}
+@media (min-width:901px){.prail{display:flex}}
+.prail.is-on{opacity:1;pointer-events:auto;transform:translate(0,-50%)}
+.prail__n{font:700 11px Verdana,sans-serif;color:#4A5873;letter-spacing:.04em}
+.prail__n b{color:#02409A;font-size:15px}
+.prail a{display:block;padding:5px 8px;min-height:0!important}
+.prail a i{display:block;width:8px;height:8px;border-radius:50%;background:#CFE4F7;transition:transform .35s var(--ease),background .3s,height .35s var(--ease),border-radius .35s}
+.prail a.is-past i{background:#6EC1E4}
+.prail a.is-cur i{background:#02409A;height:22px;border-radius:6px;transform:scaleX(1.2)}
+.prail a:hover i{background:#02409A;transform:scale(1.4)}
+.prail a.is-cur:hover i{transform:scaleX(1.2)}

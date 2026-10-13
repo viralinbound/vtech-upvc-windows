@@ -966,3 +966,34 @@ addEventListener('hashchange', () => { if (location.hash === '#lead') document.q
   }
   addEventListener('scroll', function () { if (!t) { t = true; requestAnimationFrame(pick); } }, { passive: true });
 })();
+
+/* v29: scroll-driven product interaction (parallax + side progress rail) */
+(function () {
+  var cards = [].slice.call(document.querySelectorAll('.prod[id]'));
+  if (!cards.length || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var wrap = document.querySelector('.spine-wrap') || cards[0].parentElement;
+  var rail = document.createElement('nav');
+  rail.className = 'prail'; rail.setAttribute('aria-label', 'Products');
+  rail.innerHTML = '<span class="prail__n"><b>01</b>/' + String(cards.length).padStart(2, '0') + '</span>' +
+    cards.map(function (c, i) { var h = c.querySelector('h3,h2'); return '<a href="#' + c.id + '" aria-label="' + (h ? h.textContent.replace(/"/g, '') : 'Product ' + (i + 1)) + '"><i></i></a>'; }).join('');
+  document.body.appendChild(rail);
+  var dots = [].slice.call(rail.querySelectorAll('a')), num = rail.querySelector('b'), t = false;
+  function upd() {
+    t = false;
+    var vh = innerHeight, mid = vh / 2 + 27, cur = -1;
+    var wr = wrap.getBoundingClientRect();
+    rail.classList.toggle('is-on', wr.top < vh * 0.5 && wr.bottom > vh * 0.5 && innerWidth > 900);
+    cards.forEach(function (c, i) {
+      var r = c.getBoundingClientRect(), p = (r.top + r.height / 2 - mid) / vh; // -1..1 around centre
+      p = Math.max(-1.2, Math.min(1.2, p));
+      c.style.setProperty('--pp', p.toFixed(3));
+      if (r.top <= vh * 0.5 && r.bottom > vh * 0.5) cur = i;
+    });
+    if (cur > -1) {
+      dots.forEach(function (d, i) { d.classList.toggle('is-cur', i === cur); d.classList.toggle('is-past', i < cur); });
+      num.textContent = String(cur + 1).padStart(2, '0');
+    }
+  }
+  addEventListener('scroll', function () { if (!t) { t = true; requestAnimationFrame(upd); } }, { passive: true });
+  addEventListener('resize', upd); upd();
+})();
