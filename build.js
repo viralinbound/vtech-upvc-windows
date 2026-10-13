@@ -384,6 +384,6 @@ ${REV}
 </body>
 </html>`;
 
-html = html.replace(/((?:assets\/(?:img|v2)|img2?)\/[^"' )?]+\.(?:webp|png|jpe?g|svg))/g, '$1?v=3');
+html = html.replace(/((?:assets\/(?:img|v2)|img2?)\/[^"' )?]+\.(?:webp|png|jpe?g|svg))/g, '$1?v=4');
 fs.writeFileSync(path.join(__dirname, 'index.html'), html);
 console.log('index.html written,', PRODUCTS.length, 'products');
