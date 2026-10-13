@@ -1416,3 +1416,20 @@ input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(2,64,154,.45)!
 
 /* v30: straight marquee band */
 .marquee{transform:none!important;margin:0!important;box-shadow:none!important}
+
+/* ===== v31: story pointer + livelier steps ===== */
+.story__sticky{position:relative}
+.story__ptr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:5;opacity:0;transition:opacity .5s}
+.story__ptr.is-vis{opacity:1}
+.story__ptr .ptr-line{fill:none!important;stroke:#02409A!important;stroke-width:2!important;stroke-dasharray:2 6;stroke-linecap:round}
+.story__ptr .ptr-dot{fill:#02409A!important;stroke:#fff!important;stroke-width:3!important}
+.story__ptr .ptr-pulse{fill:rgba(2,64,154,.25)!important;stroke:none!important;transform-box:fill-box;transform-origin:center;animation:ptrPulse 1.6s ease-out infinite}
+@keyframes ptrPulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(2.6);opacity:0}}
+.story .part.cur [pathLength]{stroke-width:4.5;filter:drop-shadow(0 0 8px rgba(2,64,154,.6))}
+.story .part:not(.cur).on [pathLength]{opacity:.55;transition:opacity .5s,stroke-dashoffset 1.3s var(--ease)}
+.story__steps li.is-on b{color:#fff;background:#02409A;border-radius:6px;padding:6px 8px;min-width:0;align-self:flex-start;transition:all .4s}
+.story__steps li.is-on h3{color:#02409A}
+.story__steps li{cursor:default}
+@media (max-width:900px){.story__ptr{display:none}}
+@media (prefers-reduced-motion:reduce){.story__ptr .ptr-pulse{animation:none}}
+.story svg.story__ptr{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}

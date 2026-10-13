@@ -997,3 +997,39 @@ addEventListener('hashchange', () => { if (location.hash === '#lead') document.q
   addEventListener('scroll', function () { if (!t) { t = true; requestAnimationFrame(upd); } }, { passive: true });
   addEventListener('resize', upd); upd();
 })();
+
+/* v31: "Inside the frame" — a pointer + leader line that glides to the part being described */
+(function () {
+  var sticky = document.querySelector('.story__sticky'), steps = [].slice.call(document.querySelectorAll('.story__steps li')),
+    parts = [].slice.call(document.querySelectorAll('.story .part'));
+  if (!sticky || !steps.length || !parts.length) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'story__ptr'); svg.setAttribute('aria-hidden', 'true');
+  svg.innerHTML = '<path class="ptr-line"/><circle class="ptr-pulse" r="10"/><circle class="ptr-dot" r="6"/>';
+  sticky.appendChild(svg);
+  var line = svg.querySelector('.ptr-line'), dot = svg.querySelector('.ptr-dot'), pulse = svg.querySelector('.ptr-pulse');
+  var cur = null, tgt = null, sp = null, run = false;
+  function rel(r) { var s = sticky.getBoundingClientRect(); return { x: r.left - s.left, y: r.top - s.top, w: r.width, h: r.height }; }
+  function aim() {
+    var i = steps.findIndex(function (l) { return l.classList.contains('is-on'); }); if (i < 0) i = 0;
+    var li = steps[i], h = li.querySelector('h3'), part = parts[i];
+    var el = part.querySelector('rect,path,circle') || part;
+    var hr = rel(h.getBoundingClientRect()), pr = rel(el.getBoundingClientRect());
+    var hx = hr.x + Math.min(hr.w, h.scrollWidth) + 14, hy = hr.y + hr.h / 2;
+    tgt = { x: pr.x + pr.w / 2, y: pr.y + pr.h / 2, sx: hx, sy: hy };
+    if (!cur) cur = { x: tgt.x, y: tgt.y, sx: tgt.sx, sy: tgt.sy };
+    if (!run) { run = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    var k = 0.12; ['x', 'y', 'sx', 'sy'].forEach(function (a) { cur[a] += (tgt[a] - cur[a]) * k; });
+    var mx = (cur.sx + cur.x) / 2;
+    line.setAttribute('d', 'M' + cur.sx + ' ' + cur.sy + ' C' + mx + ' ' + cur.sy + ' ' + mx + ' ' + cur.y + ' ' + cur.x + ' ' + cur.y);
+    dot.setAttribute('cx', cur.x); dot.setAttribute('cy', cur.y); pulse.setAttribute('cx', cur.x); pulse.setAttribute('cy', cur.y);
+    var d = Math.abs(tgt.x - cur.x) + Math.abs(tgt.y - cur.y) + Math.abs(tgt.sx - cur.sx) + Math.abs(tgt.sy - cur.sy);
+    if (d > 0.3) requestAnimationFrame(tick); else run = false;
+  }
+  var mo = new MutationObserver(aim); steps.forEach(function (l) { mo.observe(l, { attributes: true, attributeFilter: ['class'] }); });
+  addEventListener('resize', aim); addEventListener('load', aim);
+  var vis = new IntersectionObserver(function (es) { es.forEach(function (e) { svg.classList.toggle('is-vis', e.isIntersecting); if (e.isIntersecting) aim(); }); });
+  vis.observe(sticky); aim();
+})();
